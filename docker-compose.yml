@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+    sffs:
+        image: soundflow/sffs:latest
+        container_name: sffs
+        volumes:
+            - './sfdata:/sfdata'
+        ports:
+            - '1790:1790'
+        restart: always
