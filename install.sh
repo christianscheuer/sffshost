@@ -19,4 +19,19 @@ chmod +x /usr/local/bin/docker-compose
 mkdir -p sfdata
 mkdir -p sfdata/data
 
-echo "Now you need to install the container and the data"
+# Installing some start data
+echo "** Installing Data **"
+echo '{
+    "testuser": {
+        "email": "test@soundflow.org",
+        "password": "password",
+        "displayName": "Test",
+        "photoURL": ""
+    }
+}' > sfdata/data/auth.json
+echo '{    
+}' > sfdata/data/publishedPackagesIndex.json
+echo '{    
+}' > sfdata/data/publishedPackagesBetaIndex.json
+
+echo "Now please follow instructions from SoundFlow to allow SSH access so we can upload the container"
