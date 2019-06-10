@@ -4,13 +4,13 @@
 
 * Download https://raw.githubusercontent.com/christianscheuer/sffs/bin/assets/AlpineLinuxSFFSHostBase.ova
 * In VMWare Fusion, choose Import from this AlpineLinuxSFFSHostBase.ova
-* Choose Retry
-* Click Customize
-* Setup bridged networking via ethernet in "network adapter" (så VM får sin egen IP)
+* Choose Retry if it asks to relax verification settings
+* Click Customize Settings
+* Click "Network Adapter", activate "bridged networking via ethernet" (so VM gets its own IP)
 * Start VM (click Upgrade if prompted)
 * Log in with root/sffshost
 
 * Run this command:
 ```
-cd /opt && sudo git clone --depth 1 https://github.com/christianscheuer/sffs -b master && cd sffs && sudo chown -R $USER . && ./install-alpine.sh
+wget -O - https://raw.githubusercontent.com/christianscheuer/sffs/master/bootstrap-alpine.sh | bash
 ```
