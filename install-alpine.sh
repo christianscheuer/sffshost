@@ -34,4 +34,12 @@ echo '{
 echo '{    
 }' > sfdata/data/publishedPackagesBetaIndex.json
 
+# Setup SSH root login
+echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
+/etc/init.d/sshd restart
+
 echo "Now please follow instructions from SoundFlow to allow SSH access so we can upload the container"
+# Make sure we log out IP address
+echo "SoundFlow can now transfer Docker image to the VM via the following IP:"
+ip addr | grep eth0 | grep inet | sed -r 's/inet//' | sed 's/\/.*//' | xargs
+
