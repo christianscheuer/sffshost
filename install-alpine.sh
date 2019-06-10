@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Install Docker
 apk add docker
 apk update
