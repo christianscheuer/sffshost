@@ -12,6 +12,9 @@ apk add python-dev libffi-dev openssl-dev gcc libc-dev make
 pip install --upgrade pip
 pip install docker-compose
 
+# Install curl (for testing purposes)
+apk add curl
+
 # Make sure we're in the right directory
 cd /opt/sffs
 
@@ -38,8 +41,13 @@ echo '{
 echo 'PermitRootLogin yes' >> /etc/ssh/sshd_config
 /etc/init.d/sshd restart
 
-echo "Now please follow instructions from SoundFlow to allow SSH access so we can upload the container"
-# Make sure we log out IP address
-echo "SoundFlow can now transfer Docker image to the VM via the following IP:"
-ip addr | grep eth0 | grep inet | sed -r 's/inet//' | sed 's/\/.*//' | xargs
+echo ""
+echo ""
 
+# Make sure we log out IP address
+echo "Now run this command on SF dev computer:"
+SFFSIP=$(ip addr | grep eth0 | grep inet | sed -r 's/inet//' | sed 's/\/.*//' | xargs)
+echo "in pkg/sffs: jake send, enter IP: $SFFSIP"
+
+echo ""
+echo "When done transferring, do this in VM: cd /opt/sffs && ./start.sh"
