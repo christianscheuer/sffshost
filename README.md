@@ -12,5 +12,5 @@
 
 * Run this command:
 ```
-wget -O - https://raw.githubusercontent.com/christianscheuer/sffs/master/bootstrap-alpine.sh | bash
+wget -O - https://raw.githubusercontent.com/christianscheuer/sffs/master/bootstrap-alpine.sh | sh
 ```
