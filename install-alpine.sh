@@ -26,7 +26,7 @@ echo '
 ::wait:/sbin/openrc default --quiet &>/dev/null
 
 # Set up a couple of gettys
-tty1::respawn:/usr/bin/nano /etc/network/interfaces
+tty1::respawn:/sffshost/sffshost
 tty2::respawn:/sbin/getty 38400 tty2
 
 # Stuff to do for the 3-finger salute
@@ -42,6 +42,29 @@ tty2::respawn:/sbin/getty 38400 tty2
 cat /boot/extlinux.conf | sed 's/AUTOBOOT Alpine/AUTOBOOT SFFS/' | sed 's/\(APPEND .*\)/\1 quiet loglevel=1 /' > /var/tmp/extlinux.conf
 cat /var/tmp/extlinux.conf > /boot/extlinux.conf
 rm /var/tmp/extlinux.conf
+
+# Install .NET Core dependencies (for vores sffshost)
+apk add --no-cache \
+        ca-certificates \
+        krb5-libs \
+        libgcc \
+        libintl \
+        libssl1.0 \
+        libstdc++ \
+        lttng-ust \
+        tzdata \
+        userspace-rcu \
+        zlib
+
+# Install .NET Core
+export ASPNETCORE_VERSION=2.2.5
+wget -O aspnetcore.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/aspnetcore/Runtime/$ASPNETCORE_VERSION/aspnetcore-runtime-$ASPNETCORE_VERSION-linux-musl-x64.tar.gz \
+    && aspnetcore_sha512='6dc1058c218a8ac70c4ea8ce0c62a0ce275374c282ff87fcac940c9e472297effaab94fb7e1738d68e61f1f021166e9f565e676a0a9ddcf2aeb0762144bf7b92' \
+    && echo "$aspnetcore_sha512  aspnetcore.tar.gz" | sha512sum -c - \
+    && mkdir -p /usr/share/dotnet \
+    && tar -zxf aspnetcore.tar.gz -C /usr/share/dotnet \
+    && rm aspnetcore.tar.gz \
+    && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 
 # Make sure we're in the right directory
 cd /opt/sffs
