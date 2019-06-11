@@ -26,7 +26,7 @@ echo '
 ::wait:/sbin/openrc default --quiet &>/dev/null
 
 # Set up a couple of gettys
-tty1::respawn:/sffshost/sffshost
+tty1::respawn:/sffshostgui/sffshostgui
 tty2::respawn:/sbin/getty 38400 tty2
 
 # Stuff to do for the 3-finger salute
@@ -98,7 +98,7 @@ echo ""
 # Make sure we log out IP address
 echo "Now run this command on SF dev computer:"
 SFFSIP=$(ip addr | grep eth0 | grep inet | sed -r 's/inet//' | sed 's/\/.*//' | xargs)
-echo "in pkg/sffshost: jake send, enter IP: $SFFSIP, use password sffshost"
+echo "in pkg/sffshostgui: jake send, enter IP: $SFFSIP, use password sffshost"
 
 echo ""
 echo "When done transferring, do this in VM: cd /opt/sffs && ./start.sh"
