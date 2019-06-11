@@ -2,7 +2,7 @@
 
 ### To install on Alpine Linux VM in VMWare Fusion
 
-* Download https://raw.githubusercontent.com/christianscheuer/sffs/bin/assets/AlpineLinuxSFFSHostBase.ova
+* Download https://raw.githubusercontent.com/christianscheuer/sffshost/bin/assets/AlpineLinuxSFFSHostBase.ova
 * In VMWare Fusion, choose Import from this AlpineLinuxSFFSHostBase.ova
 * Choose Retry if it asks to relax verification settings
 * Click Customize Settings
