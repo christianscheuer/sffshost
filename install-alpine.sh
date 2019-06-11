@@ -12,8 +12,8 @@ apk add python-dev libffi-dev openssl-dev gcc libc-dev make
 pip install --upgrade pip
 pip install docker-compose
 
-# Install curl (for testing purposes)
-apk add curl
+# Install curl and nano (for testing and runtime purposes)
+apk add curl nano
 
 # Now patch inittab
 echo '
@@ -39,7 +39,9 @@ tty2::respawn:/sbin/getty 38400 tty2
 ' > /etc/inittab
 
 # Now patch /boot/extlinux.conf
-cat /boot/extlinux.conf | sed 's/AUTOBOOT Alpine/AUTOBOOT SFFS/' | sed 's/\(APPEND .*\)/\1 quiet loglevel=1 /' > /boot/extlinux.conf
+cat /boot/extlinux.conf | sed 's/AUTOBOOT Alpine/AUTOBOOT SFFS/' | sed 's/\(APPEND .*\)/\1 quiet loglevel=1 /' > /var/tmp/extlinux.conf
+cat /var/tmp/extlinux.conf > /boot/extlinux.conf
+rm /var/tmp/extlinux.conf
 
 # Make sure we're in the right directory
 cd /opt/sffs
