@@ -98,7 +98,7 @@ echo ""
 # Make sure we log out IP address
 echo "Now run this command on SF dev computer:"
 SFFSIP=$(ip addr | grep eth0 | grep inet | sed -r 's/inet//' | sed 's/\/.*//' | xargs)
-echo "in pkg/sffs: jake send, enter IP: $SFFSIP, use password sffshost"
+echo "in pkg/sffshost: jake send, enter IP: $SFFSIP, use password sffshost"
 
 echo ""
 echo "When done transferring, do this in VM: cd /opt/sffs && ./start.sh"
