@@ -40,8 +40,7 @@ apk add --no-cache \
         ca-certificates \
         krb5-libs \
         libgcc \
-        libintl \
-        libssl1.0 \
+        openssl-dev \
         libstdc++ \
         lttng-ust \
         tzdata \
