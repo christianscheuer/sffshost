@@ -6,5 +6,6 @@ services:
         volumes:
             - './sfdata:/sfdata'
         ports:
+            - '80:1795'
             - '1790:1790'
         restart: always
