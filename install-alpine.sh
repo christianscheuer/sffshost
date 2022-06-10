@@ -3,7 +3,7 @@ echo "http://dl-cdn.alpinelinux.org/alpine/v3.16/community" >> /etc/apk/reposito
 apk update
 
 # Install Docker + Docker Compose
-apk add docker docker-compose
+apk add docker docker-compose openrc
 rc-update add docker #works better to add at default runlevel, not boot!
 service docker start
 service docker status
@@ -36,9 +36,10 @@ cat /var/tmp/extlinux.conf > /boot/extlinux.conf
 rm /var/tmp/extlinux.conf
 
 # Install .NET Core dependencies (for vores sffshost)
-apk add --no-cache \
+apk add \
         ca-certificates \
         krb5-libs \
+        libintl \
         libgcc \
         openssl-dev \
         libstdc++ \
@@ -89,7 +90,8 @@ echo ""
 # Make sure we log out IP address
 echo "Now run this command on SF dev computer:"
 SFFSIP=$(ip addr | grep eth0 | grep inet | sed -r 's/inet//' | sed 's/\/.*//' | xargs)
-echo "in pkg/sffshostgui: jake send, enter IP: $SFFSIP, use password sffshost"
+echo "* in pkg/sffshostgui: jake send, enter IP: $SFFSIP, use password sffshost"
+echo "* in pkg/sffs: jake send, enter IP: $SFFSIP, use password sffshost"
 
 echo ""
 echo "When done transferring, do this in VM: cd /opt/sffs && ./start.sh"
